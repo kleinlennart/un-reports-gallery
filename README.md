@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UN Annual Reports Gallery
 
-## Getting Started
+A minimal website that displays PDF cover pages of UN organization annual reports in a responsive grid gallery.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 📖 Display covers of 51+ UN organization annual reports
+- 🎨 Responsive grid layout that adapts to screen size
+- 🔗 Direct links to official report pages
+- ⚡ Fast loading with optimized images
+- 📱 Mobile-friendly design
+
+## Setup
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Extract PDF covers:**
+   
+   The gallery needs cover images for each PDF. You have several options:
+
+   **Option A: Automatic extraction (requires ImageMagick)**
+   ```bash
+   # Install ImageMagick
+   brew install imagemagick  # macOS
+   # or
+   sudo apt-get install imagemagick  # Ubuntu
+   
+   # Run extraction script
+   ./scripts/extract-covers.sh
+   ```
+
+   **Option B: Manual extraction**
+   - Open each PDF in Preview/Adobe Reader
+   - Export first page as JPG (600x800px recommended)
+   - Place in `public/covers/` with names from `data/reports.json`
+
+   **Option C: View filename mapping**
+   ```bash
+   npm run cover-instructions
+   ```
+
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open [http://localhost:3000](http://localhost:3000)** in your browser
+
+## Project Structure
+
+```
+├── app/
+│   ├── page.tsx          # Main gallery page
+│   ├── layout.tsx        # Root layout
+│   └── globals.css       # Global styles
+├── components/
+│   └── ReportsGallery.tsx # Gallery grid component
+├── data/
+│   └── reports.json      # Report metadata
+├── docs/                 # PDF files
+├── public/
+│   └── covers/           # Cover images (you need to add these)
+├── scripts/
+│   ├── extract-covers.sh # Bash script to extract covers
+│   └── cover-instructions.js # Shows required filenames
+└── types/
+    └── report.ts         # TypeScript types
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Data Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Each report in `data/reports.json` contains:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```json
+{
+  "id": "unique-id",
+  "name": "Short Name",
+  "fullName": "Full Organization Name",
+  "year": "2024",
+  "filename": "Original_PDF_Name.pdf",
+  "coverImage": "cover-image-name.jpg",
+  "website": "https://organization.org/",
+  "reportUrl": "https://link-to-report-page.org/"
+}
+```
 
-## Learn More
+## Adding New Reports
 
-To learn more about Next.js, take a look at the following resources:
+1. Add the PDF to the `docs/` folder
+2. Add an entry to `data/reports.json`
+3. Extract/add the cover image to `public/covers/`
+4. Update the website and reportUrl with official links
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Performance
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Uses Next.js Image component for optimized loading
+- Responsive images with multiple sizes
+- Lazy loading for images below the fold
+- Minimal CSS for fast rendering
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+npm start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Or deploy to Vercel, Netlify, or any hosting platform that supports Next.js.

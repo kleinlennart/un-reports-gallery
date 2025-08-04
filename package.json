@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cover-instructions": "node scripts/cover-instructions.js"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

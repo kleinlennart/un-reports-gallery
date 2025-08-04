@@ -1,0 +1,10 @@
+<!-- Placeholder SVG for report covers -->
+<svg width="300" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="400" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="150" y="200" text-anchor="middle" fill="#64748b" font-family="Arial" font-size="14">
+    PDF Cover
+  </text>
+  <text x="150" y="220" text-anchor="middle" fill="#64748b" font-family="Arial" font-size="12">
+    Placeholder
+  </text>
+</svg>
