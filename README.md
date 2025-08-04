@@ -110,7 +110,10 @@ Each report in `data/reports.json` contains:
 
 ```bash
 npm run build
-npm start
+# npm start
+
+# for static export use:
+npx serve@latest out"
 ```
 
 ## Fixes

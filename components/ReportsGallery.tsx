@@ -19,7 +19,7 @@ function ReportCard({ report }: ReportCardProps) {
         >
             <div className="aspect-[3/4] relative overflow-hidden rounded-t-lg bg-gray-100">
                 <img
-                    src={imageError ? '/covers/placeholder.svg' : `/covers/${report.coverImage}`}
+                    src={imageError ? './covers/placeholder.svg' : `./covers/${report.coverImage}`}
                     alt={`${report.name} Annual Report ${report.year} Cover`}
                     className="w-full h-full object-cover transition-all duration-300"
                     onError={() => setImageError(true)}
