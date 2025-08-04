@@ -13,36 +13,41 @@ A minimal website that displays PDF cover pages of UN organization annual report
 ## Setup
 
 1. **Install dependencies:**
+
    ```bash
    npm install
    ```
 
 2. **Extract PDF covers:**
-   
+
    The gallery needs cover images for each PDF. You have several options:
 
    **Option A: Automatic extraction (requires ImageMagick)**
+
    ```bash
    # Install ImageMagick
    brew install imagemagick  # macOS
    # or
    sudo apt-get install imagemagick  # Ubuntu
-   
+
    # Run extraction script
    ./scripts/extract-covers.sh
    ```
 
    **Option B: Manual extraction**
+
    - Open each PDF in Preview/Adobe Reader
    - Export first page as JPG (600x800px recommended)
    - Place in `public/covers/` with names from `data/reports.json`
 
    **Option C: View filename mapping**
+
    ```bash
    npm run cover-instructions
    ```
 
 3. **Run the development server:**
+
    ```bash
    npm run dev
    ```
@@ -107,5 +112,3 @@ Each report in `data/reports.json` contains:
 npm run build
 npm start
 ```
-
-Or deploy to Vercel, Netlify, or any hosting platform that supports Next.js.
