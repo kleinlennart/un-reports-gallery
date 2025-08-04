@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-    title: "UN Annual Reports Gallery",
+    title: "UN Annual Reports Gallery (alpha)",
     description: "Browse Annual Reports from UN entities",
     keywords: ["UN", "United Nations", "annual reports", "reports", "organizations"],
 };

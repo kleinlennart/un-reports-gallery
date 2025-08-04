@@ -1,4 +1,4 @@
-# UN Annual Reports Gallery
+# UN Annual Reports Gallery (alpha)
 
 A minimal website that displays PDF cover pages of UN organization annual reports in a responsive grid gallery.
 
@@ -112,3 +112,7 @@ Each report in `data/reports.json` contains:
 npm run build
 npm start
 ```
+
+## Fixes
+
+- make sure to replace img tags with next.js optimized tags again once deployed to server and not static GitHub page
