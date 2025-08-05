@@ -1,6 +1,7 @@
 'use client';
 
 import type { Report } from '@/types/report';
+import Image from 'next/image';
 import { useState } from 'react';
 
 interface ReportCardProps {
@@ -18,10 +19,12 @@ function ReportCard({ report }: ReportCardProps) {
             className="group block bg-white rounded-lg hover:bg-gray-50 transition-colors duration-200 relative"
         >
             <div className="aspect-[3/4] relative overflow-hidden rounded-t-lg bg-gray-100">
-                <img
+                <Image
                     src={imageError ? '/covers/placeholder.svg' : `/covers/${report.coverImage}`}
                     alt={`${report.name} Annual Report ${report.year} Cover`}
-                    className="w-full h-full object-cover transition-all duration-300"
+                    fill
+                    className="object-cover transition-all duration-300"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     onError={() => setImageError(true)}
                 />
             </div>
