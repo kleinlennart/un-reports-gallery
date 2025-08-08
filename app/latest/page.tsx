@@ -1,4 +1,28 @@
+import latestReportsRaw from '@/data/output/un_ilibrary_latest_reports.json';
+
+type LatestItem = {
+    title?: string;
+    published?: string;
+    link?: string;
+    cover_image?: string;
+};
+
+function formatDateShort(input?: string) {
+    if (!input) return '';
+    const d = new Date(input);
+    if (isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    });
+}
+
 export default function LatestPage() {
+    const reports = (latestReportsRaw as unknown as LatestItem[]).filter(
+        (r) => r.cover_image && r.link
+    );
+
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Header */}
@@ -13,7 +37,16 @@ export default function LatestPage() {
                         </span>
                     </div>
                     <p className="text-un-blue mt-1 text-lg">
-                        Most recent Reports from the UN Digital Library
+                        Most recent Reports from the{' '}
+                        <a
+                            href="https://www.un-ilibrary.org/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-medium
+ hover:text-un-blue-dark transition-colors"
+                        >
+                            UN-iLibrary
+                        </a>
                     </p>
                     <a
                         href="https://github.com/kleinlennart/un-reports-gallery"
@@ -31,24 +64,36 @@ export default function LatestPage() {
 
             {/* Main Content */}
             <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                {/* Placeholder content - similar to the loading state in the main page */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {Array.from({ length: 8 }).map((_, i) => (
-                        <div key={i} className="bg-white rounded-lg overflow-hidden">
-                            <div className="aspect-[3/4] bg-gray-200 animate-pulse rounded-t-lg" />
-                            <div className="p-4 space-y-2">
-                                <div className="h-4 bg-gray-200 animate-pulse rounded" />
-                                <div className="h-3 bg-gray-200 animate-pulse rounded w-1/3" />
+                    {reports.map((item, i) => (
+                        <a
+                            key={`${item.link}-${i}`}
+                            href={item.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group block bg-white rounded-lg hover:bg-gray-50 transition-colors duration-200 relative overflow-hidden"
+                        >
+                            <div className="aspect-[3/4] relative overflow-hidden rounded-t-lg bg-gray-100">
+                                {/* Using native img to avoid remote image config */}
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src={item.cover_image!}
+                                    alt={item.title ?? 'UN report cover'}
+                                    className="h-full w-full object-cover"
+                                    loading="lazy"
+                                />
                             </div>
-                        </div>
+                            <div className="p-4">
+                                <h3 className="text-sm font-medium text-gray-900 truncate">
+                                    {item.title ?? 'Untitled'}
+                                </h3>
+                                <p className="text-xs text-un-gray mt-0.5">
+                                    {formatDateShort(item.published)}
+                                </p>
+                            </div>
+                            <div className="absolute inset-0 bg-un-blue opacity-0 group-hover:opacity-15 transition-opacity duration-300 rounded-lg" />
+                        </a>
                     ))}
-                </div>
-                
-                {/* Placeholder text */}
-                <div className="text-center mt-8">
-                    <p className="text-lg text-gray-600">
-                        This page will show the latest UN reports.
-                    </p>
                 </div>
             </main>
 
@@ -57,15 +102,37 @@ export default function LatestPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="text-center text-sm text-gray-500 space-y-2">
                         <p>
-                            Click on any report cover to visit the organization&apos;s official report page
+                            Click on any report cover to read the report on{' '}
+                            <a
+                                href="https://www.un-ilibrary.org/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-un-blue font-medium hover:underline"
+                            >
+                                un-ilibrary.org
+                            </a>
                         </p>
                         <div className="border-t border-gray-200 pt-4 mt-4">
                             <p className="mb-2">
                                 <strong>Disclaimer:</strong> This is not an official United Nations website.
-                                The information provided is for informational purposes only and no completeness or accuracy is assured.
+                                
+                                <br />
+                                The information provided is for informational purposes only and no completeness or accuracy is assured. 
+                                <br />
+                                Data extracted from the "Latest Content"&nbsp;
+                                <a
+                                    href="https://www.un-ilibrary.org/rss/content/all/most_recent_items?fmt=rss"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-un-blue font-medium hover:underline"
+                                >
+                                     RSS
+                                </a>
+                                &nbsp;of the UN-iLibrary website.
                             </p>
                             <p>
-                                Last updated: August 6, 2025
+                                Last updated:{" "}
+                                {formatDateShort(new Date().toISOString())}
                             </p>
                         </div>
                     </div>
