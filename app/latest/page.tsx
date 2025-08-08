@@ -119,7 +119,7 @@ export default function LatestPage() {
                                 <br />
                                 The information provided is for informational purposes only and no completeness or accuracy is assured. 
                                 <br />
-                                Data extracted from the "Latest Content"&nbsp;
+                                Data extracted from the &ldquo;Latest Content&rdquo;&nbsp;
                                 <a
                                     href="https://www.un-ilibrary.org/rss/content/all/most_recent_items?fmt=rss"
                                     target="_blank"
